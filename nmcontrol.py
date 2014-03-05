@@ -110,6 +110,11 @@ def main():
                 plugins_started.append(app['plugins'][plugin].name)
     print "Plugins started :", ', '.join(plugins_started)
 
+    if os.name == "nt":  # for now systray only works on MS Windows
+        import systray
+        st = systray.SystrayThread(app)
+        st.start()
+
     #services_started = []
     #for service in app['services']:
     #    if app['services'][service].running:
